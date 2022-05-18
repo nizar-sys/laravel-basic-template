@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteController;
@@ -32,5 +33,11 @@ Route::middleware('auth')->group(function() {
         Route::put('/change-profile', [ProfileController::class, 'changeProfile'])->name('change-profile');
     }); # profile group
 
+    # ------ DataTables routes ------ #
+    Route::prefix('data')->name('datatable.')->group(function(){
+        Route::get('/users', [DataTableController::class, 'getUsers'])->name('users');
+    });
+
+    Route::get('/datatable/users', [UserController::class, 'userDataTable'])->name('users.datatables');
     Route::resource('users', UserController::class);
 });

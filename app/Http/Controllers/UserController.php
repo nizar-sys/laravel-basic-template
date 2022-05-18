@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['roles:admin'])->except(['index', 'show']);
+        $this->middleware(['roles:admin'])->except(['index', 'show', 'userDataTable']);
     }
 
     /**
@@ -139,5 +139,10 @@ class UserController extends Controller
         $user->delete();
 
         return redirect(route('users.index'))->with('success', 'User berhasil dihapus.');
+    }
+
+    public function userDataTable()
+    {
+        return view('dashboard.users.index-data');
     }
 }

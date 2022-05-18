@@ -15,6 +15,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a class="nav-link {{ $routeActive == 'users.datatables' ? 'active' : '' }}" href="{{ route('users.datatables') }}">
+        <i class="fas fa-users text-warning"></i>
+        <span class="nav-link-text">{{ str()->title('users' . ' (datatable & ajax)') }}</span>
+    </a>
+</li>
+<li class="nav-item">
     <a class="nav-link {{ $routeActive == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
         <i class="fas fa-user-tie text-success"></i>
         <span class="nav-link-text">Profile</span>
