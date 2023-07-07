@@ -15,9 +15,9 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{ $routeActive == 'users.datatables' ? 'active' : '' }}" href="{{ route('users.datatables') }}">
-        <i class="fas fa-users text-warning"></i>
-        <span class="nav-link-text">{{ str()->title('users' . ' (datatable & ajax)') }}</span>
+    <a class="nav-link {{ $routeActive == 'treeview.index' ? 'active' : '' }}" href="{{ route('treeview.index') }}">
+        <i class="fas fa-users text-danger"></i>
+        <span class="nav-link-text">Treeview</span>
     </a>
 </li>
 <li class="nav-item">
