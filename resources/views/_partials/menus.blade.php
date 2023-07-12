@@ -15,12 +15,6 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{ $routeActive == 'treeview.index' ? 'active' : '' }}" href="{{ route('treeview.index') }}">
-        <i class="fas fa-users text-danger"></i>
-        <span class="nav-link-text">Treeview</span>
-    </a>
-</li>
-<li class="nav-item">
     <a class="nav-link {{ $routeActive == 'profile' ? 'active' : '' }}" href="{{ route('profile') }}">
         <i class="fas fa-user-tie text-success"></i>
         <span class="nav-link-text">Profile</span>

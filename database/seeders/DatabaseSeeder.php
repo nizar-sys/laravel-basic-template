@@ -16,10 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            RankSettingSeeder::class,
-            AccountGroupsSeeder::class,
-            AccountSeeder::class,
-            TransactionSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

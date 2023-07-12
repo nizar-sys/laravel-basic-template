@@ -3,18 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\RequestStoreOrUpdateUser;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware(['roles:admin'])->except(['index', 'show', 'userDataTable']);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -50,12 +42,13 @@ class UserController extends Controller
             'created_at' => now(),
         ];
 
-        $fileName = time() . '.' . $request->avatar->extension();
-        $validated['avatar'] = $fileName;
-        $validated['password'] = Hash::make($validated['password']);
+        if($request->hasFile('avatar')){
+            $fileName = time() . '.' . $request->avatar->extension();
+            $validated['avatar'] = $fileName;
 
-        // move file
-        $request->avatar->move(public_path('uploads/images'), $fileName);
+            // move file
+            $request->avatar->move(public_path('uploads/images'), $fileName);
+        }
 
         $user = User::create($validated);
 
@@ -109,10 +102,10 @@ class UserController extends Controller
 
             // move file
             $request->avatar->move(public_path('uploads/images'), $fileName);
-            
+
             // delete old file
             $oldPath = public_path('/uploads/images/'.$user->avatar);
-            if(file_exists($oldPath)){
+            if(file_exists($oldPath) && $user->avatar != 'avatar.png'){
                 unlink($oldPath);
             }
         }
@@ -133,16 +126,11 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         // delete old file
         $oldPath = public_path('/uploads/images/'.$user->avatar);
-        if(file_exists($oldPath)){
+        if(file_exists($oldPath) && $user->avatar != 'avatar.png'){
             unlink($oldPath);
         }
         $user->delete();
 
         return redirect(route('users.index'))->with('success', 'User berhasil dihapus.');
-    }
-
-    public function userDataTable()
-    {
-        return view('dashboard.users.index-data');
     }
 }
