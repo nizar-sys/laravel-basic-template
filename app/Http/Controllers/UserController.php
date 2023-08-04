@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Requests\RequestStoreOrUpdateUser;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -49,6 +50,8 @@ class UserController extends Controller
             // move file
             $request->avatar->move(public_path('uploads/images'), $fileName);
         }
+
+        $validated['password'] = Hash::make($validated['password']);
 
         $user = User::create($validated);
 
