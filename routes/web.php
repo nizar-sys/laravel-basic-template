@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteController;
-use App\Http\Controllers\TrackingRecordController;
+use App\Http\Controllers\TreeviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +22,6 @@ use App\Http\Controllers\TrackingRecordController;
 
 # ------ Unauthenticated routes ------ #
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
-Route::get('/scan', [RouteController::class, 'scan'])->name('scan.index');
-Route::post('/scan', [RouteController::class, 'scanStore'])->name('scan.store');
-
 require __DIR__.'/auth.php';
 
 
@@ -37,6 +36,6 @@ Route::middleware('auth')->group(function() {
     }); # profile group
 
     Route::resource('users', UserController::class);
-    Route::get('/tracking-records/reports', [TrackingRecordController::class, 'reports'])->name('tracking-records.reports');
-    Route::resource('tracking-records', TrackingRecordController::class);
+    Route::resource('treeview', TreeviewController::class)->only('index');
+    Route::resource('profit', ProfitController::class)->only('index');
 });

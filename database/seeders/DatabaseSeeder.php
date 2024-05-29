@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\TrackingRecord;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +18,5 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
-        TrackingRecord::factory(10)->create();
     }
 }
